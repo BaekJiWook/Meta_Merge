@@ -1,21 +1,12 @@
 <script lang="ts" setup>
-import TodoList from '../views/apps/todo-list/TodoList.vue'
+import Login from '@/views/apps/todo-list/login-v1.vue'
 </script>
 
 <template>
-  <div>
-    <Vcard
-      class="mx-auto mb-6"
-      outlined
-    >
-      <TodoList />
-    </Vcard>
-  </div>
+  <VCard
+    class="mx-auto mb-6"
+    outlined
+  >
+    <Login />
+  </VCard>
 </template>
-
-<style scoped>
-.todo {
-  color: gray;
-  text-decoration: line-through; /* 할 일 완료 시 취소선과 회색 처리 */
-}
-</style>

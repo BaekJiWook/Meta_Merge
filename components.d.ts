@@ -41,8 +41,6 @@ declare module 'vue' {
     CustomRadiosWithIcon: typeof import('./src/@core/components/app-form-elements/CustomRadiosWithIcon.vue')['default']
     CustomRadiosWithImage: typeof import('./src/@core/components/app-form-elements/CustomRadiosWithImage.vue')['default']
     DemoAlertColors: typeof import('./src/views/demos/components/alert/DemoAlertColors.vue')['default']
-    DemoAlertOutlined: typeof import('./src/views/demos/components/alert/DemoAlertOutlined.vue')['default']
-    DemoCheckboxBasic: typeof import('./src/views/demos/forms/form-elements/checkbox/DemoCheckboxBasic.vue')['default']
     DemoCheckboxIcon: typeof import('./src/views/demos/forms/form-elements/checkbox/DemoCheckboxIcon.vue')['default']
     DemoListProgressList: typeof import('./src/views/demos/components/list/DemoListProgressList.vue')['default']
     DemoListUserList: typeof import('./src/views/demos/components/list/DemoListUserList.vue')['default']
