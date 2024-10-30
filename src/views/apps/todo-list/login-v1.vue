@@ -4,6 +4,7 @@
 // import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw'
 import { shallowRef } from 'vue'
 import TodoList from '@/views/apps/todo-list/TodoList.vue'
+import Register from '@/views/apps/todo-list/register.vue'
 import { themeConfig } from '@themeConfig'
 
 // definePage({
@@ -12,7 +13,7 @@ import { themeConfig } from '@themeConfig'
 //     public: true,
 //   },
 // })
-const currentComponent = shallowRef(null)
+const currentComponent = shallowRef<typeof TodoList | null>(null)
 
 const form = ref({
   email: '',
@@ -80,6 +81,10 @@ const onSubmit = () => {
       if (isValid)
         login()
     })
+}
+
+const register = () => {
+  currentComponent.value = Register
 }
 </script>
 
@@ -186,29 +191,24 @@ const onSubmit = () => {
                   block
                   type="submit"
                 >
-                  Login
+                  TodoList Login
                 </VBtn>
               </VCol>
 
               <!-- create account -->
-              <!--
-                <VCol
+
+              <VCol
                 cols="12"
                 class="text-body-1 text-center"
+              >
+                <span
+                  class="d-inline-block"
+                  style="cursor: pointer;"
+                  @click="register"
                 >
-                <span class="d-inline-block">
-                New on our platform?
+                  Create an account
                 </span>
-
-                <RouterLink
-                class="text-primary ms-1 d-inline-block text-body-1"
-                :to="{ name: 'pages-authentication-register-v1' }"
-                >
-                Create an account
-                </RouterLink>
-
-                </VCol>
-              -->
+              </VCol>
 
               <!--
                 <VCol
