@@ -4,22 +4,11 @@ import TodoList from '@/views/apps/todo-list/TodoList.vue'
 import Register from '@/views/apps/todo-list/register.vue'
 import { themeConfig } from '@themeConfig'
 
-// definePage({
-//   meta: {
-//     layout: 'blank',
-//     public: true,
-//   },
-// })
 const currentComponent = shallowRef<typeof TodoList | null>(null)
-
-const form = ref({
-  email: '',
-  password: '',
-  remember: false,
-})
 
 const isPasswordVisible = ref(false)
 
+// 사용자의 권한 규칙을 업데이트
 const ability = useAbility()
 
 const errors = ref<Record<string, string | undefined>>({
@@ -27,6 +16,7 @@ const errors = ref<Record<string, string | undefined>>({
   password: undefined,
 })
 
+// 유효성 검사
 const refVForm = ref<VForm>()
 
 const credentials = ref({
@@ -34,7 +24,7 @@ const credentials = ref({
   password: 'admin',
 })
 
-// const rememberMe = ref(false)
+const rememberMe = ref(false)
 
 const login = async () => {
   try {
@@ -57,7 +47,9 @@ const login = async () => {
     useCookie('userData').value = userData
     useCookie('accessToken').value = accessToken
 
-    currentComponent.value = TodoList
+    await nextTick(() => {
+      currentComponent.value = TodoList
+    })
   }
   catch (err) {
     console.error(err)
@@ -103,7 +95,7 @@ const register = () => {
               <!-- email -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.email"
+                  v-model="credentials.email"
                   autofocus
                   label="Email or Username"
                   type="email"
@@ -114,7 +106,7 @@ const register = () => {
               <!-- password -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.password"
+                  v-model="credentials.password"
                   label="Password"
                   placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
@@ -125,7 +117,7 @@ const register = () => {
                 <!-- remember me checkbox -->
                 <div class="d-flex align-center justify-space-between flex-wrap my-6">
                   <VCheckbox
-                    v-model="form.remember"
+                    v-model="rememberMe"
                     label="Remember me"
                   />
                 </div>
@@ -181,10 +173,6 @@ const register = () => {
     </div>
   </VCard>
   <div />
-  <!--
-    </div>
-    </div>
-  -->
 </template>
 
 <style lang="scss">
