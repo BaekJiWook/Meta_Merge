@@ -22,5 +22,6 @@ declare module 'vue-router/auto-routes' {
     '$error': RouteRecordInfo<'$error', '/:error(.*)', { error: ParamValue<true> }, { error: ParamValue<false> }>,
     'kopo-page': RouteRecordInfo<'kopo-page', '/kopoPage', Record<never, never>, Record<never, never>>,
     'login': RouteRecordInfo<'login', '/login', Record<never, never>, Record<never, never>>,
+    'merge': RouteRecordInfo<'merge', '/merge', Record<never, never>, Record<never, never>>,
   }
 }

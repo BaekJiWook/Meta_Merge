@@ -9,5 +9,10 @@ export default [
     to: { name: 'kopo-page' },
     icon: { icon: 'tabler-file' },
   },
+  {
+    title: 'Merge',
+    to: { name: 'merge' },
+    icon: { icon: 'tabler-file' },
+  },
 
 ]
