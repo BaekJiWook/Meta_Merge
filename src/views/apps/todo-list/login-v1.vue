@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-// import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw'
-// import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw'
 import { shallowRef } from 'vue'
 import TodoList from '@/views/apps/todo-list/TodoList.vue'
 import Register from '@/views/apps/todo-list/register.vue'
@@ -23,9 +20,6 @@ const form = ref({
 
 const isPasswordVisible = ref(false)
 
-// const route = useRoute()
-// const router = useRouter()
-
 const ability = useAbility()
 
 const errors = ref<Record<string, string | undefined>>({
@@ -44,7 +38,7 @@ const credentials = ref({
 
 const login = async () => {
   try {
-    const res = await $api('/auth/login', {
+    const res = await $api('/auth/loginTodoList', {
       method: 'POST',
       body: {
         email: credentials.value.email,
@@ -63,11 +57,6 @@ const login = async () => {
     useCookie('userData').value = userData
     useCookie('accessToken').value = accessToken
 
-    // // // Redirect to `to` query if exist or redirect to index route
-    // // // ❗ nextTick is required to wait for DOM updates and later redirect
-    // await nextTick(() => {
-    //   router.replace(route.query.to ? String(route.query.to) : '/kopoPage')
-    // })
     currentComponent.value = TodoList
   }
   catch (err) {
@@ -89,44 +78,8 @@ const register = () => {
 </script>
 
 <template>
-  <!--
-    <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <div class="position-relative my-sm-16">
-  -->
-  <!-- 👉 Top shape -->
-  <!--
-    <VNodeRenderer
-    :nodes="h('div', { innerHTML: authV1TopShape })"
-    class="text-primary auth-v1-top-shape d-none d-sm-block"
-    />
-  -->
-
-  <!-- 👉 Bottom shape -->
-  <!--
-    <VNodeRenderer
-    :nodes="h('div', { innerHTML: authV1BottomShape })"
-    class="text-primary auth-v1-bottom-shape d-none d-sm-block"
-    />
-  -->
-
   <!-- 👉 Auth Card -->
   <VCard>
-    <!--
-      <VCardItem class="justify-center">
-      <VCardTitle>
-
-      <RouterLink to="/">
-      <div class="app-logo">
-      <VNodeRenderer :nodes="themeConfig.app.logo" />
-      <h1 class="app-logo-title">
-      {{ themeConfig.app.title }}
-      </h1>
-      </div>
-      </RouterLink>
-
-      </VCardTitle>
-      </VCardItem>
-    -->
     <div>
       <template v-if="currentComponent">
         <component :is="currentComponent" />
@@ -175,15 +128,6 @@ const register = () => {
                     v-model="form.remember"
                     label="Remember me"
                   />
-
-                  <!--
-                    <RouterLink
-                    class="text-primary"
-                    :to="{ name: 'pages-authentication-forgot-password-v1' }"
-                    >
-                    Forgot Password?
-                    </RouterLink>
-                  -->
                 </div>
 
                 <!-- login button -->

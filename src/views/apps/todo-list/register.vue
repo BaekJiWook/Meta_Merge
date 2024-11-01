@@ -102,10 +102,7 @@ const loginView = () => {
                 </div>
 
                 <!-- Sign up button -->
-                <VBtn
-                  block
-                  type="submit"
-                >
+                <VBtn block>
                   Sign up
                 </VBtn>
               </VCol>
