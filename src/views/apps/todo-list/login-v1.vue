@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-// import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw'
-// import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw'
 import { shallowRef } from 'vue'
 import TodoList from '@/views/apps/todo-list/TodoList.vue'
 import Register from '@/views/apps/todo-list/register.vue'
@@ -15,16 +12,13 @@ import { themeConfig } from '@themeConfig'
 // })
 const currentComponent = shallowRef<typeof TodoList | null>(null)
 
-const form = ref({
-  email: '',
-  password: '',
-  remember: false,
-})
+// const form = ref({
+//   email: '',
+//   password: '',
+//   remember: false,
+// })
 
 const isPasswordVisible = ref(false)
-
-// const route = useRoute()
-// const router = useRouter()
 
 const ability = useAbility()
 
@@ -40,11 +34,11 @@ const credentials = ref({
   password: 'admin',
 })
 
-// const rememberMe = ref(false)
+const rememberMe = ref(false)
 
 const login = async () => {
   try {
-    const res = await $api('/auth/login', {
+    const res = await $api('/auth/loginTodoList', {
       method: 'POST',
       body: {
         email: credentials.value.email,
@@ -63,11 +57,6 @@ const login = async () => {
     useCookie('userData').value = userData
     useCookie('accessToken').value = accessToken
 
-    // // // Redirect to `to` query if exist or redirect to index route
-    // // // ❗ nextTick is required to wait for DOM updates and later redirect
-    // await nextTick(() => {
-    //   router.replace(route.query.to ? String(route.query.to) : '/kopoPage')
-    // })
     currentComponent.value = TodoList
   }
   catch (err) {
@@ -89,44 +78,8 @@ const register = () => {
 </script>
 
 <template>
-  <!--
-    <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <div class="position-relative my-sm-16">
-  -->
-  <!-- 👉 Top shape -->
-  <!--
-    <VNodeRenderer
-    :nodes="h('div', { innerHTML: authV1TopShape })"
-    class="text-primary auth-v1-top-shape d-none d-sm-block"
-    />
-  -->
-
-  <!-- 👉 Bottom shape -->
-  <!--
-    <VNodeRenderer
-    :nodes="h('div', { innerHTML: authV1BottomShape })"
-    class="text-primary auth-v1-bottom-shape d-none d-sm-block"
-    />
-  -->
-
   <!-- 👉 Auth Card -->
   <VCard>
-    <!--
-      <VCardItem class="justify-center">
-      <VCardTitle>
-
-      <RouterLink to="/">
-      <div class="app-logo">
-      <VNodeRenderer :nodes="themeConfig.app.logo" />
-      <h1 class="app-logo-title">
-      {{ themeConfig.app.title }}
-      </h1>
-      </div>
-      </RouterLink>
-
-      </VCardTitle>
-      </VCardItem>
-    -->
     <div>
       <template v-if="currentComponent">
         <component :is="currentComponent" />
@@ -150,7 +103,7 @@ const register = () => {
               <!-- email -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.email"
+                  v-model="credentials.email"
                   autofocus
                   label="Email or Username"
                   type="email"
@@ -161,7 +114,7 @@ const register = () => {
               <!-- password -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.password"
+                  v-model="credentials.password"
                   label="Password"
                   placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
@@ -172,18 +125,9 @@ const register = () => {
                 <!-- remember me checkbox -->
                 <div class="d-flex align-center justify-space-between flex-wrap my-6">
                   <VCheckbox
-                    v-model="form.remember"
+                    v-model="rememberMe"
                     label="Remember me"
                   />
-
-                  <!--
-                    <RouterLink
-                    class="text-primary"
-                    :to="{ name: 'pages-authentication-forgot-password-v1' }"
-                    >
-                    Forgot Password?
-                    </RouterLink>
-                  -->
                 </div>
 
                 <!-- login button -->
