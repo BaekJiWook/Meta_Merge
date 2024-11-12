@@ -46,6 +46,7 @@ statistics.value[0].number = String(totalNumber.value)
           v-for="(item, index) in statistics"
           :key="item.title"
           class="d-flex flex-column align-center justify-center position-relative"
+          :style="{ flexBasis: `${item.title.length * 5}%` }"
         >
           <div class="text-h4 d-flex flex-column align-center justify-center">
             <h5 :style="{ color: item.color }">

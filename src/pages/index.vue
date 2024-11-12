@@ -9,12 +9,4 @@ import Login from '@/views/apps/todo-list/login-v1.vue'
   >
     <Login />
   </VCard>
-  <!--
-    <VCard
-    class="mx-auto mb-6"
-    outlined
-    >
-    <Register />
-    </VCard>
-  -->
 </template>

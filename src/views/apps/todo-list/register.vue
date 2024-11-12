@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { VForm } from 'vuetify/components/VForm'
 import Login from '@/views/apps/todo-list/login-v1.vue'
-
-// definePage({
-//   meta: {
-//     layout: 'blank',
-//     unauthenticatedOnly: true,
-//   },
-// })
+import { db } from '@db/auth/db' // db import 추가
 
 const form = ref({
+  fullname: '',
   username: '',
   email: '',
   password: '',
@@ -19,6 +14,55 @@ const form = ref({
 
 const currentComponent = shallowRef<typeof Login | null>(null)
 const isPasswordVisible = ref(false)
+const refVForm = ref<VForm>()
+
+const regist = async () => {
+  try {
+    const res = await $api('/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: form.value.fullname,
+        username: form.value.username,
+        email: form.value.email,
+        password: form.value.password,
+        avatar: `${import.meta.env.BASE_URL ?? '/'}images/avatars/avatar-${db.users.length + 1}.png`, // db 사용
+        role: 'client', // db 사용
+        abilityRules: [{ action: 'read', subject: 'all' }], // db 사용
+      }),
+    })
+
+    // 응답 객체를 로그로 확인
+    console.log('Response:', res) // 응답 객체 확인
+    // 응답 확인
+    if (res.ok) {
+      const data = await res.json() // JSON으로 파싱
+
+      console.log('Registration successful:', data)
+
+      // 응답 데이터를 클라이언트 측 상태에 반영
+      db.users.push(data.userData) // db.users는 프론트엔드 상태에서 업데이트해야 함
+    }
+    else {
+      const errorText = await res.text() // 오류 메시지를 텍스트로 가져옴
+
+      console.error('Registration error:', errorText)
+    }
+  }
+  catch (err) {
+    console.error('Registration error:', JSON.stringify(err, null, 2))
+  }
+}
+
+const onSubmit = () => {
+  refVForm.value?.validate()
+    .then(({ valid: isValid }) => {
+      if (isValid)
+        regist()
+    })
+}
 
 const loginView = () => {
   try {
@@ -47,20 +91,32 @@ const loginView = () => {
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm
+            ref="refVForm"
+            @submit.prevent="onSubmit"
+          >
             <VRow>
+              <!-- Fullname -->
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.fullname"
+                  :rules="[requiredValidator]"
+                  autofocus
+                  label="Fullname"
+                  placeholder="Johndoe lee"
+                />
+              </VCol>
               <!-- Username -->
               <VCol cols="12">
                 <AppTextField
                   v-model="form.username"
                   :rules="[requiredValidator]"
-                  autofocus
                   label="Username"
                   placeholder="Johndoe"
                 />
               </VCol>
 
-              <!-- email -->
+              <!-- Email -->
               <VCol cols="12">
                 <AppTextField
                   v-model="form.email"
@@ -71,7 +127,7 @@ const loginView = () => {
                 />
               </VCol>
 
-              <!-- password -->
+              <!-- Password -->
               <VCol cols="12">
                 <AppTextField
                   v-model="form.password"
@@ -102,7 +158,10 @@ const loginView = () => {
                 </div>
 
                 <!-- Sign up button -->
-                <VBtn block>
+                <VBtn
+                  block
+                  type="submit"
+                >
                   Sign up
                 </VBtn>
               </VCol>
@@ -123,7 +182,7 @@ const loginView = () => {
         </VCardText>
       </template>
     </div>
-  </vcard>
+  </VCard>
 </template>
 
 <style lang="scss">

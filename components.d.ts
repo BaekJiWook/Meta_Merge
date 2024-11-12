@@ -44,6 +44,7 @@ declare module 'vue' {
     DemoCheckboxIcon: typeof import('./src/views/demos/forms/form-elements/checkbox/DemoCheckboxIcon.vue')['default']
     DemoListProgressList: typeof import('./src/views/demos/components/list/DemoListProgressList.vue')['default']
     DemoListUserList: typeof import('./src/views/demos/components/list/DemoListUserList.vue')['default']
+    DemoTextfieldBasic: typeof import('./src/views/demos/forms/form-elements/textfield/DemoTextfieldBasic.vue')['default']
     DialogCloseBtn: typeof import('./src/@core/components/DialogCloseBtn.vue')['default']
     DropZone: typeof import('./src/@core/components/DropZone.vue')['default']
     EnableOneTimePasswordDialog: typeof import('./src/components/dialogs/EnableOneTimePasswordDialog.vue')['default']

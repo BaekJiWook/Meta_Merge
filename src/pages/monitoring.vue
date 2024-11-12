@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import CardStatisticsAdapter from '@/views/pages/cards/card-statistics/CardStatisticsAdapter.vue'
-
-// import AdapterOverview from '@/views/pages/monitoring/adapterOverview.vue'
+import AdapterStatus from '@/views/pages/monitoring/adapterStatus.vue'
+import AgentInfo from '@/views/pages/monitoring/agentInfo.vue'
 import AgentMonitoring from '@/views/pages/monitoring/agentMonitoring.vue'
+import ServerRuntimeInfo from '@/views/pages/monitoring/serverRuntimeInfo.vue'
 
 const navigationTab = ref('운영현황')
 const tabItems = ['운영현황', '시스템 정보']
@@ -14,11 +14,19 @@ const tabItems = ['운영현황', '시스템 정보']
   <VContainer fluid>
     <VRow>
       <VCol cols="12">
-        <VCard>
+        <VCard class="elevation-1 rounded">
+          <!-- 상단에 배경색이 있는 모니터링 제목 -->
+          <div class="monitoring-header">
+            <VCardTitle class="text-h6 text-white m-0">
+              모니터링
+            </VCardTitle>
+          </div>
+
           <!-- 왼쪽 정렬된 전체 화면 탭 -->
           <VTabs
             v-model="navigationTab"
             align-tabs="start"
+            class="tabs-container"
           >
             <VTab
               v-for="item in tabItems"
@@ -43,17 +51,24 @@ const tabItems = ['운영현황', '시스템 정보']
                 <VDivider />
               </VCardItem>
               <VCol>
-                <CardStatisticsAdapter />
-                <!-- <AdapterOverview /> -->
+                <AdapterStatus />
               </VCol>
             </VWindowItem>
 
             <VWindowItem value="시스템 정보">
-              <VCardItem class="text-center">
-                <VCardTitle>원하는컴포넌트</VCardTitle>
+              <VCardItem class="text-start">
+                <VCardTitle>에이전트 정보</VCardTitle>
+                <VDivider />
               </VCardItem>
               <VCardText>
-                <!-- 원하는 다른 컴포넌트를 여기에 추가 -->
+                <AgentInfo />
+              </VCardText>
+              <VCardItem class="text-start">
+                <VCardTitle>서버 런타임 정보</VCardTitle>
+                <VDivider />
+              </VCardItem>
+              <VCardText>
+                <ServerRuntimeInfo />
               </VCardText>
             </VWindowItem>
           </VWindow>
@@ -62,3 +77,13 @@ const tabItems = ['운영현황', '시스템 정보']
     </VRow>
   </VContainer>
 </template>
+
+<style scoped>
+.monitoring-header {
+  background-color: #ff7f00; /* 오렌지 배경색 */
+}
+
+.tabs-container {
+  background-color: #ff7f00; /* 오렌지 배경색 */
+}
+</style>
