@@ -16,6 +16,7 @@ export default defineConfig({
   plugins: [
     // Docs: https://github.com/posva/unplugin-vue-router
     // ℹ️ This plugin should be placed before vue plugin
+    // Vue Router 설정
     VueRouter({
       getRouteName: routeNode => {
         // Convert pascal case to kebab case
@@ -36,6 +37,7 @@ export default defineConfig({
     vueJsx(),
 
     // Docs: https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin
+    // Vuetify 플러그인 설정
     vuetify({
       styles: {
         configFile: 'src/assets/styles/variables/_vuetify.scss',
@@ -43,11 +45,13 @@ export default defineConfig({
     }),
 
     // Docs: https://github.com/johncampionjr/vite-plugin-vue-layouts#vite-plugin-vue-layouts
+    // Vue Layouts 플러그인 설정
     Layouts({
       layoutsDirs: './src/layouts/',
     }),
 
     // Docs: https://github.com/antfu/unplugin-vue-components#unplugin-vue-components
+    // 자동 컴포넌트 임포트
     Components({
       dirs: ['src/@core/components', 'src/views/demos', 'src/components'],
       dts: true,
@@ -61,6 +65,7 @@ export default defineConfig({
     }),
 
     // Docs: https://github.com/antfu/unplugin-auto-import#unplugin-auto-import
+    // 자동 임포트 설정
     AutoImport({
       imports: ['vue', VueRouterAutoImports, '@vueuse/core', '@vueuse/math', 'vue-i18n', 'pinia'],
       dirs: [
@@ -102,4 +107,5 @@ export default defineConfig({
       './src/**/*.vue',
     ],
   },
+
 })

@@ -12,12 +12,6 @@ import { themeConfig } from '@themeConfig'
 // })
 const currentComponent = shallowRef<typeof TodoList | null>(null)
 
-// const form = ref({
-//   email: '',
-//   password: '',
-//   remember: false,
-// })
-
 const isPasswordVisible = ref(false)
 
 const ability = useAbility()

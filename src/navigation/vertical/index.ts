@@ -10,9 +10,17 @@ export default [
     icon: { icon: 'tabler-file' },
   },
   {
-    title: 'Merge',
-    to: { name: 'merge' },
+    title: 'Monitoring',
+    to: { name: 'monitoring' },
     icon: { icon: 'tabler-file' },
+
+    // children: [
+    //   {
+    //      title: 'List',
+    //     to: 'apps-ecommerce-product-list'
+    //   },
+    // ]
+
   },
 
 ]
