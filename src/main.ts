@@ -4,6 +4,7 @@ import App from '@/App.vue'
 import { registerPlugins } from '@core/utils/plugins'
 
 // Styles
+import '@/plugins/iconify/icons.css' // 아이콘경로추가
 import '@core/scss/template/index.scss'
 import '@styles/styles.scss'
 
