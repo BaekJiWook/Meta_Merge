@@ -22,5 +22,9 @@ export default [
     // ]
 
   },
-
+  {
+    title: 'agent',
+    to: { name: 'agent' },
+    icon: { icon: 'tabler-file' },
+  },
 ]

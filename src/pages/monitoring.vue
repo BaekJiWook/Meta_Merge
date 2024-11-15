@@ -17,7 +17,7 @@ const tabItems = ['운영현황', '시스템 정보']
         <VCard class="elevation-1 rounded">
           <!-- 상단에 배경색이 있는 모니터링 제목 -->
           <div class="monitoring-header">
-            <VCardTitle class="text-h6 text-white m-0">
+            <VCardTitle class="text-h4 m-0">
               모니터링
             </VCardTitle>
           </div>
@@ -77,13 +77,3 @@ const tabItems = ['운영현황', '시스템 정보']
     </VRow>
   </VContainer>
 </template>
-
-<style scoped>
-.monitoring-header {
-  background-color: #ff7f00; /* 오렌지 배경색 */
-}
-
-.tabs-container {
-  background-color: #ff7f00; /* 오렌지 배경색 */
-}
-</style>
